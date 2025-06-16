@@ -26,6 +26,7 @@ jobs:
             cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DBUILD_ONLY="kms;acm-pca" ..
             make -j "$(nproc)" install
             cd /mnt
+            export AWS_SDK_PATH=/mnt/aws-sdk-cpp/.build/crt/aws-crt-cpp/generated
             make -j "$(nproc)" AWS_SDK_STATIC=y
       - run: mv aws_kms_pkcs11.so aws_kms_pkcs11-${{ matrix.arch }}.so
       - uses: actions/upload-artifact@v4
